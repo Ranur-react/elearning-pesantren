@@ -1,0 +1,14 @@
+<h2 class="tm-color-primary tm-section-title mb-4">Pengumuman</h2>
+                          <?php
+								$no=0;
+								foreach ($post->result_array() as $i) :
+								$no++;
+								$id=$i['id_pengumuman'];
+								$judul=$i['judul_pengumuman'];
+								$ket=$i['ket_pengumuman'];
+								$tgl=$i['tgl_pengumuman'];
+							?>
+						  <p class="mb-5">
+                            <a target="_blank" href="<?php echo base_url('pengumuman/lihat/').$id?>" class="btn" ><?php echo $no;?>. <b><font color="green">(<?php $tgl1=date("Y-m-d",strtotime($tgl));echo tanggal_indonesia($tgl1);?>, <?php echo $tgl2=date("H:i",strtotime($tgl)); ?>)</b></font> <?php echo $judul;?></a>
+                          </p>
+						  <?php endforeach;?>
