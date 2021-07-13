@@ -172,10 +172,10 @@
 			<p><h5 class="page-header">Jumlah Soal</h5></p>
 		</div>		
 		<div class="col-sm-8 invoice-col">
-			<p><h5 class="page-header"><?php echo $this->session->userdata('nama');?></h5></p>
-			<p><h5 class="page-header"><?php echo $b['nama_kelas']?></h5></p>
-			<p><h5 class="page-header"><?php echo $b['nama_mapel']?></h5></p>
-			<p><h5 class="page-header"><?php echo $b['jumlah']?></h5></p>
+			<p><h5 class="page-header">:&nbsp;<?php echo $this->session->userdata('nama');?></h5></p>
+			<p><h5 class="page-header">:&nbsp;<?php echo $b['nama_kelas']?></h5></p>
+			<p><h5 class="page-header">:&nbsp;<?php echo $b['nama_mapel']?></h5></p>
+			<p><h5 class="page-header">:&nbsp;<?php echo $b['jumlah']?></h5></p>
 		</div>
      </div>
 	 <div class="row">
@@ -209,8 +209,8 @@
             <td><?php echo $salah;?></td>
 			<td><?php echo $kosong;?></td>
             <td>
-				<?php if($score > 70 ){?><font color="green"><?php echo $score;?></font><?php }?>
-				<?php if($score < 70 ){?><font color="red"><?php echo $score;?></font><?php }?>
+				<?php if($score > 70 ){?><font color="green"><?php echo round($score, 2);?>%</font><?php }?>
+				<?php if($score < 70 ){?><font color="red"><?php echo round($score, 2);?>%</font><?php }?>
 			</td>
           </tr>
 		  <?php endforeach;?>

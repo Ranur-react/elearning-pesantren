@@ -34,6 +34,20 @@ class Latihan extends CI_Controller{
 		$this->load->view('latihan/cetak', $x);
 	
 	}
+	function cetakstudy(){
+		$id=$this->uri->segment(3);
+		$user=$this->session->userdata('username');
+		$kelas = $this->input->post('kelas');
+		$lat = $this->input->post('lat');
+		$mata= $this->input->post('mata');
+		$x['post'] = $this->l->cetak($id);
+		$x['post1'] = $this->l->cetakguru($kelas,$user,$lat);
+		$x['post2'] = $this->l->cetakhasil($kelas,$user,$mata);
+		$x['jumlahsiswa'] = $this->l->cetakhasiljmlhsiswa($kelas,$user,$mata);
+
+		$this->load->view('latihan/cetakstudy', $x);
+	
+	}
 	function hasillatihan(){
 		$user=$this->session->userdata('username');
 		$kls=$this->session->userdata('kelas');		
@@ -44,6 +58,20 @@ class Latihan extends CI_Controller{
 		$template = array(
 		'menu' => $this->load->view('template/menu', '', TRUE),
 		'isi' => $this->load->view('latihan/hasil', $x, TRUE),
+		);
+		$this->parser->parse('template/template', $template);
+	
+	}
+	function hasilstudy(){
+		$user=$this->session->userdata('username');
+		$kls=$this->session->userdata('kelas');		
+		$x['datakelas'] = $this->l->datakelas($user);
+		$x['datamapel'] = $this->l->datamapel($user);
+		$x['dataujian'] = $this->l->namaujian($user);
+		$x['post1'] = $this->l->datahasillatihan1($user);
+		$template = array(
+		'menu' => $this->load->view('template/menu', '', TRUE),
+		'isi' => $this->load->view('latihan/hasilstudy', $x, TRUE),
 		);
 		$this->parser->parse('template/template', $template);
 	

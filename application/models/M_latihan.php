@@ -24,6 +24,14 @@ class M_latihan extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM hasil_ujian join ujian on id_ujian=id_ujian_hasil join kelas on id_kelas=kelas_hasil join siswa on nis=siswa_hasil join mapel on id_mapel=mapel_ujian where kelas_hasil='$kelas' AND guru_hasil='$user' AND id_ujian_hasil='$lat'");
 		return $hsl;
 	}
+	function cetakhasil($kelas,$user,$mata) {
+		$hsl=$this->db->query("SELECT * ,SUM(benar) as totalbenar,SUM(kosong) as totalkosong,SUM(salah) as totalsalah,sum(score)/count(score) as totalscore FROM hasil_ujian join ujian on id_ujian=id_ujian_hasil join kelas on id_kelas=kelas_hasil join siswa on nis=siswa_hasil join mapel on id_mapel=mapel_ujian join soal on mapel_soal=id_mapel where kelas_hasil='$kelas' AND guru_hasil='$user' AND mapel_ujian='$mata' group by `id_soal`");
+		return $hsl;
+	}
+	function cetakhasiljmlhsiswa($kelas,$user,$mata) {
+		$hsl=$this->db->query("SELECT * ,SUM(benar) as totalbenar,SUM(kosong) as totalkosong,SUM(salah) as totalsalah,sum(score)/count(score) as totalscore FROM hasil_ujian join ujian on id_ujian=id_ujian_hasil join kelas on id_kelas=kelas_hasil join siswa on nis=siswa_hasil join mapel on id_mapel=mapel_ujian join soal on mapel_soal=id_mapel where kelas_hasil='$kelas' AND guru_hasil='$user' AND mapel_ujian='$mata' group by `siswa_hasil`;");
+		return $hsl;
+	}
 	function datahasillatihan1($user) {
 		$hsl=$this->db->query("SELECT * FROM hasil_ujian join ujian on id_ujian=id_ujian_hasil join kelas on id_kelas=kelas_hasil join siswa on nis=siswa_hasil where siswa_hasil='$user' ORDER BY nama_kelas ASC");
 		return $hsl;
